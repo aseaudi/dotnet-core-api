@@ -23,3 +23,14 @@ See [LICENSE](https://github.com/Azure-Samples/dotnet-core-api/blob/master/LICEN
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
   
+## How to deploy to AKS
+
+```
+docker build -t <acr-name>/django-demo .
+docker push <acr-name>/django-demo
+kubctl apply -f deploy.yaml
+kubectl get deployment
+kubectl get pods
+kubectl get service
+curl <endpoin-ip>:8000
+```
