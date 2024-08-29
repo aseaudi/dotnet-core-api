@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dotnet-demo-deployment
+  labels:
+    app: dotnet-demo
+spec:
+  selector:
+    matchLabels:
+      app: dotnet-demo
+  template:
+    metadata:
+      labels:
+        app: dotnet-demo
+    spec:
+      containers:
+      - name: dotnet-demo
+        image: acr694644.azurecr.io/dotnet-demo:1
+        ports:
+        - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dotnet-demo-service
+spec:
+  selector:
+    app: dotnet-demo
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
