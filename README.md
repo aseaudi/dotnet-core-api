@@ -26,11 +26,13 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 ## How to deploy to AKS
 
 ```
-docker build -t <acr-name>/django-demo .
-docker push <acr-name>/django-demo
+docker build -t <acr-name>/dotnet-demo .
+docker push <acr-name>/dotnet-demo
 kubctl apply -f deploy.yaml
 kubectl get deployment
 kubectl get pods
 kubectl get service
-curl <endpoin-ip>:8000
+kubectl get endpoint
+curl <endpoint-ip>:5000
+open your web browser and go to http://<endpoint-ip>:5000
 ```
