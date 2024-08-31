@@ -54,9 +54,23 @@ Run the following commands to build and deploy the sample application in AKS.
 cd c:\users\<username>\desktop\msdocs-python-django-webapp-quickstart
 docker build -t <acr-name>/dotnet-demo .
 docker push <acr-name>/dotnet-demo
-# if docker push gives unauthorized error run the below command to login to azure contaienr registry
-# az acr login --name <acr-name>.azurecr.io
-# docker push <acr-name>/dotnet-demo
+```
+If docker push gives unauthorized error run the below command to login to azure contaienr registry
+```
+az acr login --name <acr-name>.azurecr.io
+docker push <acr-name>/dotnet-demo
+```
+After docker image is pushed successfuly, modify the <acr-name> in the deploy.yaml file like below
+```
+spec:
+ template:
+   spec:
+     containers:
+     - name: dotnet-demo
+       image: <acr-name>.azurecr.io/dotnet-demo
+```
+After updating deploy.yaml, deploy the application using the commands below
+```
 kubctl apply -f deploy.yaml
 kubectl get deployment
 kubectl get pods
