@@ -71,12 +71,20 @@ spec:
 ```
 After updating deploy.yaml, deploy the application using the commands below
 ```
-kubctl apply -f deploy.yaml
-kubectl get deployment
-kubectl get pods
-kubectl get service
-kubectl get endpoints
-curl <endpoint-ip>:5000
+C:\Users\user1234\Desktop\dotnet-core-api>kubectl apply -f deploy.yaml
+deployment.apps/dotnet-demo-deployment created
+service/dotnet-demo-service created
+C:\Users\user1234\Desktop\dotnet-core-api>kubectl get pods
+NAME                                      READY   STATUS    RESTARTS   AGE
+dotnet-demo-deployment-689dc8d6bf-v9std   1/1     Running   0          2m23s
+C:\Users\user1234\Desktop\dotnet-core-api>kubectl get svc
+NAME                  TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+dotnet-demo-service   ClusterIP   10.0.216.132   <none>        5000/TCP   2m28s
+kubernetes            ClusterIP   10.0.0.1       <none>        443/TCP    116m
+C:\Users\user1234\Desktop\dotnet-core-api>kubectl get ep
+NAME                  ENDPOINTS          AGE
+dotnet-demo-service   10.224.0.26:5000   2m34s   <<< endpoint-ip = 10.224.0.26
+kubernetes            10.224.0.6:443     116m
 ```
 
 Open your web browser and go to http://<endpoint-ip>:5000, you should see the application frontend, so you can test it is functional.
